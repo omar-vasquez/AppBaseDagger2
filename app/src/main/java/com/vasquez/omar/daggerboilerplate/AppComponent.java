@@ -9,6 +9,10 @@ import dagger.android.AndroidInjector;
  * Created by jos_c on 21/03/2018.
  */
 
+/**
+ * Injects application dependencies.
+ */
+
 @Singleton
 @Component(modules = AppModule.class)
 interface AppComponent extends AndroidInjector<App> {

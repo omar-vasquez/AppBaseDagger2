@@ -1,11 +1,14 @@
 package com.vasquez.omar.daggerboilerplate.ui.common;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+
+import com.vasquez.omar.daggerboilerplate.navigation.Navigator;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,6 +23,10 @@ import dagger.android.HasFragmentInjector;
  */
 
 public abstract class BaseActivity extends Activity implements HasFragmentInjector {
+
+    //* Inyectar el navegador de actividades.
+    @Inject
+    protected Navigator navigator;
 
     @Inject
     @Named(BaseActivityModule.ACTIVITY_FRAGMENT_MANAGER)
@@ -43,5 +50,9 @@ public abstract class BaseActivity extends Activity implements HasFragmentInject
         fragmentManager.beginTransaction()
                 .add(containerViewId, fragment)
                 .commit();
+    }
+
+    protected final void showDialogFragment(DialogFragment dialogFragment, String tag) {
+        dialogFragment.show(fragmentManager, tag);
     }
 }
